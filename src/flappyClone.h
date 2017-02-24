@@ -35,6 +35,7 @@
 		//Game function variables
 		int gameover = 0;
 		int movescreen = 0;
+		int XCOORD = 0;
 
 		//Bitmaps
 		BITMAP *buffer;

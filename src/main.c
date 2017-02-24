@@ -23,9 +23,9 @@ void gameLoop()
 		
 		getInput();
 
-		update_map();
 		update_player();
-
+		update_map();
+		
 		draw_map();		
 		draw_player();
 
@@ -60,14 +60,21 @@ void initialize()
 	initialize_player();
 }
 
+void install_positionAdjust()
+{
+	
+}
 
 void update_map() 
 {
-	if(movescreen) mapxoff += SCROLLSPEED;
-
-	if(mapxoff > (mapwidth * mapblockwidth - WIDTH)) {
-		mapxoff = mapwidth * mapblockwidth - WIDTH;
-	}
+	if(movescreen) {
+		
+		mapxoff += player->x;
+		if(mapxoff < 0) mapxoff = 0;
+		if(mapxoff > (mapwidth * mapblockwidth - WIDTH)) {
+			mapxoff = mapwidth * mapblockwidth - WIDTH;
+		}
+	} 
 }
 
 void draw_map() 
@@ -130,15 +137,22 @@ void update_player()
 	}
 
 	if(movescreen) {
+		player->x = XCOORD;
 		player->y += player->yspeed;
 		player->yspeed += GRAVITY;
 	}
 }
 
+void update_XCOORD() 
+{
+	XCOORD += SCROLLSPEED;
+}
+END_OF_FUNCTION(update_playerX)
+
 void draw_player()
 {
 	draw_sprite(buffer, player_image[player->curframe],
-		player->x, player->y);
+		player->x-mapxoff, player->y);
 }
 
 void draw_screen() 
