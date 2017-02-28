@@ -1,6 +1,0 @@
-spaceship.bmp -> Light space bomber by DreamRunner ->
-http://pixeljoint.com/pixelart/43790.htm
-
-Background tiling: -> Robin Verleun
-
-scifi_Tiles: -> http://opengameart.org/content/sci-fi-platform-tiles

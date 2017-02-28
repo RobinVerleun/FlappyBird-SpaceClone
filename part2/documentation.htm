@@ -1,0 +1,150 @@
+<h2><a href="./FlappyBird-SpaceClone.zip">DOWNLOAD FlappyBird-SpaceClone.zip</a></h2>
+
+<h2>General Overview</h2>
+<pre>
+FlappyBird SpaceClone is a game with a not-so hidden agenda. As the name
+implies, the game is a mockup of the popular FlappyBird game released
+for IOS phones a couple of years back. Players control a spaceship attempting
+to fly down a long corridor, with pillars and blocks acting as obstacles. The 
+difficulty of the game is in the physics of the flight, as the ship moves
+erratically up and down while being affected by gravity. Players will require
+timing and mechanical skill to make it as far as they can without crashing into
+any of the obstacles.
+</pre>
+
+<h2>Target System and Requirements</h2>
+<pre>
+The game is only planned to work on Linux distributions. Allegro mus be 
+included in the environment path. Hardware requirement are a non-factor for a 
+game of this size and detail.
+ </pre>
+
+<h2>Story</h2>
+<pre>
+Damaged, your ship sits on a platform ready to escape its hostile environments-
+however, the ship can only provide thrusts in spurts. You must navigate the 
+hostile environment and reach the end! Don't crash!
+</pre>
+
+<h2>Theme: Graphics and Sound</h2>
+<pre>
+The game plays in am ambiguous steel-like environment. This can be interpreted 
+as an enemy ship, or a cityscape of sorts. Ad advanced future-tech feeling 
+should be conveyed to the player as they scroll through the map environment.
+
+Sounds should provide a sense of urgency and energy to the player. High energy
+8-Bit music will serve the purpose. The nature of the music and the difficulty
+of the game will keep the player invested in repeated attempts.
+</pre>
+
+<h2>Menus</h2>
+<pre>
+The <b>introduction menu</b> should welcome the player and demonstrate all 
+available controls for the game, including access to the help menu. It should 
+also quickly blurb the purpose for the player to be doing what they’re doing 
+(see the story).
+
+The <b>help menu</b> will show the user the controls available, as well as how 
+to toggle the help menu and disable/re-enable the music.
+
+The <b>exit menu</b> will show the player their score, and prompt them to 
+restart the game.
+</pre>
+
+<h2>Playing a Game</h2>
+<pre>
+The game begins, and the player is introduced to the game. Pressing the enter 
+key will remove the introduction menu and leave the player sitting on a 
+platform, awaiting input. Once the player presses space-bar, the game begins 
+scrolling, and gravity turns on. Terrain will scroll towards the player, and
+the player is responsible for micro-managing their ship with the jump mechanic
+to fit through the narrow gaps.
+
+The game will track the distance the player covers and convert that into a 
+score for the player. Upon colliding with terrain, the player is given the 
+gameover screen, and a chance to restart the game.
+</pre>
+
+<h2>Characters and NPC Description</h2>
+<pre>
+The player-character is a transport ship.
+</pre>
+
+<h2>Artificial Intelligence Overview</h2>
+<pre>
+N/A
+</pre>
+
+<h2>Design Philosophy</h2>
+<pre>
+The design goal for the game is the same as many of the games I enjoy - 
+short, simple, and addictive gameplay, where the results of previous runs of 
+the game do not affect the next run in any way. It removes variables that could 
+influence gameplay and allow the player to practice and repeat themselves 
+enough to find improvement, and allow a sense of accomplishment.
+</pre>
+
+<h2>Design Notes</h2>
+<pre>
+The background tile was designed in Picta, on Linux. Due to issues installing 
+Wine, the map was created using Mappy for Windows. The background was designed 
+first, cloned throughout the map, and then the obstacle were coded in. Once 
+the Mappy .FMP file was generated, the file was brough back into Linux, where 
+the rest of the game development was completed.
+
+There was a need to modify the mappal.c source code and fix an issue with 
+invalid value assignments. Casting was, for some reason, causing invalid lvalue
+assignments. This was solved by adjusting the casts. 
+
+For lines 608-614 in mappyal.c:
+
+<b>Old:</b>
+mappyal.c:608:34: error: lvalue required as left operand of assignment
+((BITMAP *) myblkstrpt->bgoff) = abmTiles[myblkstrpt->bgoff];
+^
+mappyal.c:610:35: error: lvalue required as left operand of assignment
+((BITMAP *) myblkstrpt->fgoff) = abmTiles[myblkstrpt->fgoff];
+^
+mappyal.c:612:36: error: lvalue required as left operand of assignment
+((BITMAP *) myblkstrpt->fgoff2) = abmTiles[myblkstrpt->fgoff2];
+^
+mappyal.c:614:36: error: lvalue required as left operand of assignment
+((BITMAP *) myblkstrpt->fgoff3) = abmTiles[myblkstrpt->fgoff3];
+
+<b>New:</b>
+myblkstrpt->bgoff = (BLKSTR *)abmTiles[myblkstrpt->bgoff];
+if (myblkstrpt->fgoff!=0)
+myblkstrpt->fgoff = (BLKSTR *)abmTiles[myblkstrpt->fgoff];
+if (myblkstrpt->fgoff2!=0)
+myblkstrpt->fgoff2 = (BLKSTR *)abmTiles[myblkstrpt->fgoff2];
+if (myblkstrpt->fgoff3!=0)
+myblkstrpt->fgoff3 = (BLKSTR *)abmTiles[myblkstrpt->fgoff3];
+</pre>
+
+
+<h2>Conclusion</h2
+<pre>
+FlappyBird-SpaceClone is a tribute/clone of the popular Flappy Bird game, and 
+is designed to showcase a scrolling background using the Mappy C API. Players 
+are encouraged to improve themselves through repeated attempts.
+</pre>
+
+<h2>Credits:</h2>
+
+<div><pre>
+<a href="http://pixeljoint.com/pixelart/43790.htm">Player Character</a>
+Light space bomber by DreamRunner.
+</pre></div>
+
+<div><pre>
+<a href="http://opengameart.org/content/sci-fi-platform-tiles">Sci-fi tileset</a>
+</pre></div>
+
+<div><pre>
+Background tile designed by Robin Verleun in Picta.
+</pre></div>
+
+<div><pre>
+Game Design and Source Code
+Created by Robin Verleun, 2017.
+</pre></div>
